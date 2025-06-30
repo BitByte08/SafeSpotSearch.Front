@@ -36,7 +36,7 @@ const SaveList: React.FC = () => {
                             <span className="font-bold text-xl">{loc.description || `위치 #${loc.id}`}</span>
                         </button>
                         <button onClick={() => handleDelete(loc.id)} className="w-full bg-amber-800 text-white rounded">삭제</button>
-                        <button onClick={() => location.href=`http://localhost:8000/location/update_description/${loc.id}`} className="w-full bg-amber-300 rounded">수정</button>
+                        <button onClick={() => location.href=`${process.env.NEXT_PUBLIC_API_BASE_URL}/location/update_description/${loc.id}`} className="w-full bg-amber-300 rounded">수정</button>
                     </li>
                 ))}
             </ul>
