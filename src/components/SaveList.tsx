@@ -28,14 +28,15 @@ const SaveList: React.FC = () => {
     };
     return (
         <div className="px-8 overflow-y-auto">
-            <p className="text-2xl font-bold sticky top-0 bg-amber-100">내 저장 위치</p>
+            <p className="text-2xl font-bold sticky top-0 bg-amber-100 mb-2">내 저장 위치</p>
             <ul>
                 {saveList.map((loc) => (
-                    <li key={loc.id} className="flex flex-col">
+                    <li key={loc.id} className="flex flex-col mb-4">
                         <button onClick={() => setCenter([loc.lat,loc.lon])}>
-                            {loc.description || `위치 #${loc.id}`}
+                            <span className="font-bold text-xl">{loc.description || `위치 #${loc.id}`}</span>
                         </button>
-                        <button onClick={() => handleDelete(loc.id)} className="w-full bg-amber-400 rounded">삭제</button>
+                        <button onClick={() => handleDelete(loc.id)} className="w-full bg-amber-800 text-white rounded">삭제</button>
+                        <button onClick={() => location.href=`http://localhost:8000/location/update_description/${loc.id}`} className="w-full bg-amber-300 rounded">수정</button>
                     </li>
                 ))}
             </ul>
