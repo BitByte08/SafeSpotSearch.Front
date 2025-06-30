@@ -22,7 +22,7 @@ const SaveButton: React.FC<SaveButtonProps> = ({ lat, lon, description }) => {
             params.append("longitude", lon.toString());
             if (description) params.append("description", description);
 
-            await axios.post("http://localhost:8000/location/save_location", params, {
+            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/location/save_location`, params, {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 withCredentials: true,
             });

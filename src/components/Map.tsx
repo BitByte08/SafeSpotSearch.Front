@@ -44,6 +44,7 @@ const MapWithPing = () => {
     const {center, setCenter} = useMapStore();
     const [clickPos, setClickPos] = useState<[number, number] | null>(null);
     const [shelters, setShelters] = useState<Shelter[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(pos => {
@@ -54,7 +55,8 @@ const MapWithPing = () => {
     }, []);
     const fetchShelters = async () => {
         if (!clickPos) return;
-        const res = await axios.get("http://localhost:8000/location/around", {
+        setLoading(true);
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/location/around`, {
             params: {
                 latitude: clickPos[0],
                 longitude: clickPos[1],
@@ -63,6 +65,7 @@ const MapWithPing = () => {
         });
         setShelters(res.data.shelters);
         console.log(res.data);
+        setLoading(false);
     };
     useEffect(() => {
         setClickPos(center);
@@ -105,7 +108,7 @@ const MapWithPing = () => {
                 <Circle center={center} radius={5000} color="blue" />
             </MapContainer>
             <button onClick={fetchShelters} disabled={!clickPos} className="p-2 bg-blue-300 rounded">
-                🔍 핑 기준으로 대피소 검색
+                {!loading?<>🔍 핑 기준으로 대피소 검색</>:<>🔍 검색중..</>}
             </button>
         </div>
     );
