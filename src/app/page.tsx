@@ -1,10 +1,10 @@
 "use client"; // 안 넣어도 괜찮지만, 넣는 게 명확성에 도움됨
 
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import dynamic from "next/dynamic";
-import { fetchRange } from "@/lib/around";
+import {fetchRange} from "@/lib/around";
 import Location from '@/types/location';
-// Map 컴포넌트를 동적으로 불러오기 (SSR 비활성화)
+
 const Map = dynamic(() => import("@/components/Map"), {
     ssr: false,
 });
@@ -19,7 +19,7 @@ export default function Home() {
             navigator.geolocation.getCurrentPosition(async (pos) => {
                 const lat = pos.coords.latitude;
                 const lon = pos.coords.longitude;
-                setPosition({ lat, lon });
+                setPosition({lat, lon});
 
                 try {
                     const response = await fetchRange(lat, lon);
@@ -33,17 +33,17 @@ export default function Home() {
     }, []);
 
     return (
-        <main style={{ padding: "2rem" }} className="h-full w-full">
+        <main style={{padding: "2rem"}} className="h-full w-full">
             <h1>📍 내 위치 기반 5000m 반경 표시</h1>
 
             {position && data ? (
                 <>
-                    <div style={{ marginTop: "1rem" }}>
+                    <div style={{marginTop: "1rem"}}>
                         <p>🧭 위도: {position.lat}</p>
                         <p>🧭 경도: {position.lon}</p>
                         <p>📏 반경: {data.center.radius} m</p>
                     </div>
-                    <Map center={data.center} shelters={data.shelters} />
+                    <Map />
                 </>
             ) : (
                 <p>위치 정보를 가져오는 중입니다...</p>

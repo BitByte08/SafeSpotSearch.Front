@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { fetchGetLocations } from "@/lib/getLocation";
 import useSaveListStore from "@/store/SaveListStore";
 import {deleteLocation} from "@/lib/delLocation";
@@ -14,7 +14,7 @@ export interface Location {
 
 const SaveList: React.FC = () => {
     const {saveList, setSavelist} = useSaveListStore();
-    const {center, setCenter} = useMapStore();
+    const {setCenter} = useMapStore();
     useEffect(() => {
         fetchGetLocations().then(setSavelist).catch(console.error);
     }, []);

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import axios from "axios";
 import useSaveListStore from "@/store/SaveListStore";
 import {fetchGetLocations} from "@/lib/getLocation";
@@ -12,7 +12,7 @@ interface SaveButtonProps {
 const SaveButton: React.FC<SaveButtonProps> = ({ lat, lon, description }) => {
     const [loading, setLoading] = useState(false);
     const [msg, setMsg] = useState("");
-    const {saveList, setSavelist} = useSaveListStore();
+    const {setSavelist} = useSaveListStore();
     const handleSave = async () => {
         setLoading(true);
         setMsg("");
@@ -22,16 +22,13 @@ const SaveButton: React.FC<SaveButtonProps> = ({ lat, lon, description }) => {
             params.append("longitude", lon.toString());
             if (description) params.append("description", description);
 
-            const res = await axios.post("http://localhost:8000/location/save_location", params, {
+            await axios.post("http://localhost:8000/location/save_location", params, {
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 withCredentials: true,
             });
             setMsg("저장 성공!");
             fetchGetLocations().then(setSavelist).catch(console.error);
 
-        } catch (e: any) {
-            console.log(e);
-            setMsg("저장 실패: " + (e.response?.data?.detail));
         } finally {
             setLoading(false);
         }
