@@ -75,7 +75,7 @@ const MapWithPing = () => {
 
     return (
         <div>
-            <MapContainer center={center} zoom={14} style={{ height: "600px", marginTop: "10px" }}>
+            <MapContainer center={center} zoom={14} style={{ height: "60vh", marginTop: "10px" }}>
                 <MapFlyTo center={center} /> {/* MapContainer 안에 위치 */}
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <ClickHandler onClick={(lat, lon) => setClickPos([lat, lon])} />
