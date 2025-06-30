@@ -74,8 +74,8 @@ const MapWithPing = () => {
     if (!center) return <p>📍 위치 불러오는 중...</p>;
 
     return (
-        <div>
-            <MapContainer center={center} zoom={14} style={{ height: "60vh", marginTop: "10px" }}>
+        <div className="h-full w-full">
+            <MapContainer center={center} zoom={14} style={{height: "100%", width:"100%", zIndex: 0 }}>
                 <MapFlyTo center={center} /> {/* MapContainer 안에 위치 */}
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <ClickHandler onClick={(lat, lon) => setClickPos([lat, lon])} />
@@ -107,7 +107,7 @@ const MapWithPing = () => {
                 ))}
                 <Circle center={center} radius={5000} color="blue" />
             </MapContainer>
-            <button onClick={fetchShelters} disabled={!clickPos} className="p-2 bg-blue-300 rounded">
+            <button onClick={fetchShelters} disabled={!clickPos} className="px-8 py-2 bg-amber-100 border-2 border-gray-950 text-black rounded-2xl absolute bottom-2 right-4">
                 {!loading?<>🔍 핑 기준으로 대피소 검색</>:<>🔍 검색중..</>}
             </button>
         </div>

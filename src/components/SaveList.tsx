@@ -27,7 +27,7 @@ const SaveList: React.FC = () => {
         }
     };
     return (
-        <div className="px-8 overflow-y-auto">
+        <div className="mt-20 px-8 mx-2 overflow-y-auto">
             <p className="text-2xl font-bold sticky top-0 bg-amber-100 mb-2">내 저장 위치</p>
             <ul>
                 {saveList.map((loc) => (

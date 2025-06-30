@@ -33,12 +33,12 @@ export default function Home() {
     }, []);
 
     return (
-        <main style={{padding: "2rem"}} className="h-full w-full">
-            <h1>📍 내 위치 기반 5000m 반경 표시</h1>
+        <main className="h-full w-full">
 
             {position && data ? (
                 <>
-                    <div style={{marginTop: "1rem"}}>
+                    <div className="absolute top-0 z-1 bg-amber-100 pr-8 py-4 rounded-lg border-2 ml-4 mt-2">
+                        <h1>📍 내 위치 기반 5000m 반경 표시</h1>
                         <p>🧭 위도: {position.lat}</p>
                         <p>🧭 경도: {position.lon}</p>
                         <p>📏 반경: {data.center.radius} m</p>
